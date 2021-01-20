@@ -5,12 +5,10 @@ from PIL import Image
 from flask import request
 from flask import jsonify
 from flask import Flask
-from flask_cors import CORS
 import pickle
 import tensorflow as tf
 
 app = Flask(__name__)
-cors = CORS(app)
 model = None
 #model = tf.keras.models.load_model("modelsav")
 
@@ -44,7 +42,9 @@ def index():
 def predict():
     message = request.get_json(force=True)
     encoded = message['image']
-    decoded = base64.b64decode(encoded)
+    with open("download.jpg", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+    decoded = base64.b64decode(my_string)
     image = Image.open(io.BytesIO(decoded))
     processed_image = preprocess_image(image, target_size=(128, 128))
     prediction = model.predict(processed_image)
@@ -52,6 +52,7 @@ def predict():
     preclass = {0: "Apple_healthy", 1: "Apple_unhealthy", 2: "Pepper_bell_healthy", 3: "Pepper_bell_bacterial_spot", 4: "Cherry_(includingsor)_healthy", 5: "Cherry_(includingsor)_Powdery_mildew", 6: "Corn_(Maize)_healthy", 7: "Corn_(Maize)_unhealthy",
                 8: "Grape_healthy", 9: "Grape_unhealthy", 10: "Peach_healthy", 11: "Peach_bacterial_spot", 12: "Potato_healthy", 13: "Potato_unhealthy", 14: "Strawberry_healthy", 15: "Strawberry_Leaf_scorch", 16: "Tamato_healthy", 17: "Tamato_unhealthy"}
     response = preclass[np.argmax(prediction)]
+    print(response)
     return jsonify(response)
 
 
