@@ -15,7 +15,6 @@ import pickle
 import tensorflow as tf
 
 app = Flask(__name__)
-model = pickle.load(open("leaf_finalized_model.sav", 'rb'))
 #model = tf.keras.models.load_model("modelsav")
 
 
@@ -26,6 +25,17 @@ def preprocess_image(image, target_size):
     image = img_to_array(image)
     image = np.expand_dims(image, axis=0)
     return image
+
+
+def load_model():
+    # load the pre-trained Keras model (here we are using a model
+    # pre-trained on ImageNet and provided by Keras, but you can
+    # substitute in your own networks just as easily)
+    global model
+    model = pickle.load(open("leaf_finalized_model.sav", 'rb'))
+    model.compile(optimizer='adam', loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
 
 
 @ app.route("/")
@@ -52,4 +62,5 @@ if __name__ == '__main__':
     # port = int(os.environ.get('PORT', 5000))
     print(("* Loading Keras model and Flask starting server..."
            "please wait until server has fully started"))
+    load_model()
     app.run()
