@@ -30,7 +30,8 @@ def load_model():
     # substitute in your own networks just as easily)
     global model
     model = tf.keras.models.load_model("my_h5_model.h5")
-
+    model.compile(optimizer='Adam', loss='squared_hinge',
+                  metrics=['accuracy'])
     return model
 
 
