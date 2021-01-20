@@ -42,9 +42,7 @@ def index():
 def predict():
     message = request.get_json(force=True)
     encoded = message['image']
-    with open("download.jpg", "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
-    decoded = base64.b64decode(my_string)
+    decoded = base64.b64decode(encoded)
     image = Image.open(io.BytesIO(decoded))
     processed_image = preprocess_image(image, target_size=(128, 128))
     prediction = model.predict(processed_image)
