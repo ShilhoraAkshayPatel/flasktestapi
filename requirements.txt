@@ -1,0 +1,17 @@
+itsdangerous==1.1.0
+Werkzeug==0.15.6
+wheel==0.34.2
+Flask==1.1.1
+flask-cors==3.0.8
+gunicorn==19.9.0
+Keras==2.3.1
+Keras-Applications==1.0.8
+Keras-Preprocessing==1.1.0
+numpy==1.18.1
+pickle-mixin==1.0.2
+pickleshare==0.7.5
+tensorflow-cpu==2.4.0
+Click==7.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+pillow
