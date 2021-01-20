@@ -5,12 +5,10 @@ from PIL import Image
 from flask import request
 from flask import jsonify
 from flask import Flask
-from flask_cors import CORS
 import pickle
 import tensorflow as tf
 
 app = Flask(__name__)
-cors = CORS(app)
 model = None
 #model = tf.keras.models.load_model("modelsav")
 
@@ -29,7 +27,7 @@ def load_model():
     # pre-trained on ImageNet and provided by Keras, but you can
     # substitute in your own networks just as easily)
     global model
-    model = tf.keras.models.load_model("modelsav")
+    model = tf.keras.models.load_model("my_h5_model.h5")
 
     return model
 
