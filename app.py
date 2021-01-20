@@ -26,9 +26,8 @@ def load_model():
     # pre-trained on ImageNet and provided by Keras, but you can
     # substitute in your own networks just as easily)
     global model
-    model = pickle.load(open("leaf_finalized_model.sav", 'rb'))
-    model.compile(optimizer='adam', loss='categorical_crossentropy',
-                  metrics=['accuracy'])
+    model = tf.keras.models.load_model("modelsav")
+
     return model
 
 
