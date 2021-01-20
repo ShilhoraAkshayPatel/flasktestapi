@@ -5,10 +5,12 @@ from PIL import Image
 from flask import request
 from flask import jsonify
 from flask import Flask
+from flask_cors import CORS
 import pickle
 import tensorflow as tf
 
 app = Flask(__name__)
+cors = CORS(app)
 model = None
 #model = tf.keras.models.load_model("modelsav")
 
