@@ -29,7 +29,7 @@ def preprocess_image(image, target_size):
 
 @app.route("/")
 def index():
-    return "Api is working go to /api/predict to get predction with img as input"
+    return "Api is working go to /api/predict (hello this is for test perposes"
 
 
 @app.route('/api/predict', methods=['POST'])
