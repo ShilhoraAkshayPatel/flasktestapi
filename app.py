@@ -15,7 +15,8 @@ import pickle
 import tensorflow as tf
 
 app = Flask(__name__)
-model = tf.keras.models.load_model("modelsav")
+model = pickle.load(open("leaf_finalized_model.sav", 'rb'))
+#model = tf.keras.models.load_model("modelsav")
 
 
 def preprocess_image(image, target_size):
