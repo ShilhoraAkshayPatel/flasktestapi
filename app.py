@@ -15,7 +15,7 @@ import pickle
 import tensorflow as tf
 
 app = Flask(__name__)
-model = pickle.load(open("leaf_finalized_model.sav", 'rb'))
+model = tf.keras.models.load_model("modelsav")
 
 
 def preprocess_image(image, target_size):
@@ -27,12 +27,12 @@ def preprocess_image(image, target_size):
     return image
 
 
-@app.route("/")
+@ app.route("/")
 def index():
     return "Api is working go to /api/predict to get predction with img as input"
 
 
-@app.route('/api/predict', methods=['POST'])
+@ app.route('/api/predict', methods=['POST'])
 def predict():
     message = request.get_json(force=True)
     encoded = message['image']
@@ -48,7 +48,7 @@ def predict():
 
 
 if __name__ == '__main__':
-    #port = int(os.environ.get('PORT', 5000))
+    # port = int(os.environ.get('PORT', 5000))
     print(("* Loading Keras model and Flask starting server..."
            "please wait until server has fully started"))
     app.run()
